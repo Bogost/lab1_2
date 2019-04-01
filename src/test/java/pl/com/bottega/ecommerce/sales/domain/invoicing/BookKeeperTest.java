@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.Id;
+import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class BookKeeperTest {
 
@@ -35,4 +36,10 @@ public class BookKeeperTest {
         assertThat(nrOfProductsOnInvoice, Matchers.comparesEqualTo(0));
     }
 
+    @Test
+    public void WithoutProductsThereIsNothigToPayOnReturnedInvoice() {
+        Money money = bookKeeper.issuance(klient, items)
+                                .getGros();
+        assertThat(money.equals(new Money(0)), Matchers.comparesEqualTo(true));
+    }
 }
