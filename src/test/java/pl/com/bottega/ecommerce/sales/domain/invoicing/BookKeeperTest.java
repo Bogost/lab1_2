@@ -1,10 +1,11 @@
 package pl.com.bottega.ecommerce.sales.domain.invoicing;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class BookKeeperTest {
         int nrOfProductsOnInvoice = bookKeeper.issuance(klient, items)
                                               .getItems()
                                               .size();
-        assertEquals(nrOfProductsOnInvoice, 0);
+        assertThat(nrOfProductsOnInvoice, Matchers.comparesEqualTo(0));
     }
 
 }
