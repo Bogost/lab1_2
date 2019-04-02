@@ -1,5 +1,8 @@
 package pl.com.bottega.ecommerce.sales.domain.invoicing;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
@@ -72,5 +75,15 @@ public class BookKeeperTest {
         Money money = bookKeeper.issuance(klient, someItems)
                                 .getGros();
         assertThat(money.equals(new Money(5 * 1.07 + 30 * 1.05 + 10 * 1.23)), Matchers.comparesEqualTo(true));
+    }
+
+    @Test
+    public void CheckItemsOnTheInvoice() {
+        List<InvoiceLine> items = bookKeeper.issuance(klient, someItems)
+                                            .getItems();
+
+        // .getProduct();
+        assertThat(items,
+                contains(hasProperty("product", is(apple)), hasProperty("product", is(peniciline)), hasProperty("product", is(pencil))));
     }
 }
