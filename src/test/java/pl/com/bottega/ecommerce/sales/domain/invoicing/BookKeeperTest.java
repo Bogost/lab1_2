@@ -67,4 +67,10 @@ public class BookKeeperTest {
         assertThat(money.equals(new Money(0)), Matchers.comparesEqualTo(true));
     }
 
+    @Test
+    public void CheckPriceOnTheInvoice() {
+        Money money = bookKeeper.issuance(klient, someItems)
+                                .getGros();
+        assertThat(money.equals(new Money(5 * 1.07 + 30 * 1.05 + 10 * 1.23)), Matchers.comparesEqualTo(true));
+    }
 }
