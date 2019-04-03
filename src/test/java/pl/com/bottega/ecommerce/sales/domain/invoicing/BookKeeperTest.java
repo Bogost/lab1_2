@@ -86,4 +86,5 @@ public class BookKeeperTest {
         assertThat(items,
                 contains(hasProperty("product", is(apple)), hasProperty("product", is(peniciline)), hasProperty("product", is(pencil))));
     }
+
 }
